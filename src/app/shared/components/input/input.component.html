@@ -1,0 +1,15 @@
+<div class="form-group input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      <i class="{{fontAwesomeClass}}"></i> </span>
+  </div>
+  <input
+    [name]="fieldName" [value]="value"
+    [type]="inputType" [disabled]="isDisabled" [placeholder]="placeholder"
+    (input)="onChange( $event )" (blur)="touched()"
+    [class.is-invalid]="formField.invalid && formField.touched"
+    [class.is-valid]="!(formField.invalid && formField.untouched)"
+    class="form-control">
+</div>
+
+<app-show-errors [ctrl]="formField"></app-show-errors>

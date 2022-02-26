@@ -1,0 +1,14 @@
+<div class="form-group input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"> <i class="{{fontAwesomeClass}}"></i> </span>
+  </div>
+  <select class="form-control custom-select" [attr.id]="id"
+          (change)="onSelectionChange($any($event.target).value)" (blur)="onTouched()"
+          [class.is-invalid]="formField.invalid && formField.touched"
+          [class.is-valid]="!(formField.invalid && formField.untouched)">
+    <option selected disabled>{{label}}</option>
+    <option *ngFor="let o of options" [ngValue]="o.value">{{o.label}}</option>
+  </select>
+</div>
+
+<app-show-errors [ctrl]="formField"></app-show-errors>

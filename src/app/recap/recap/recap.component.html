@@ -1,0 +1,226 @@
+<section *ngIf="data" class="container mt-3 cart_section sec_ptb_100 clearfix">
+  <div class="container">
+    <div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
+
+
+      <div class="col-lg-4 col-md-9 col-sm-10 col-xs-12">
+        <br>
+        <div class="feature_vehicle_item mt-0 ml-0">
+          <h3 class="item_title mb-0">
+            <a>
+              {{data.firstName | uppercase}} {{data.lastName}}
+            </a>
+          </h3>
+          <div class="item_image position-relative">
+            <a class="image_wrap">
+              <img
+                src="../../../assets/img/profile.png"
+                alt="image_not_found">
+              <br>
+            </a>
+            <br>
+            <span class="item_price bg_default_blue">Signed up on {{today | date}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12">
+        <div class="cart_info_content">
+
+
+          <!-- personal info -->
+          <p-divider align="center">
+            <p-badge [style]="{'background-color': '#4CAF50'}" styleClass="p-mr-2" icon="pi pi-users"
+                     value="Personal Information" size="large">
+            </p-badge>
+          </p-divider>
+          <div class="cart_offers_include">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <ul class="cart_info_list2 ul_li_block clearfix">
+                  <li><strong>First name:</strong> {{data.firstName | uppercase}}</li>
+                  <li><strong>Last name:</strong> {{data.lastName}}</li>
+                </ul>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <ul class="cart_info_list2 ul_li_block clearfix">
+                  <li><strong>Phone</strong> {{data.phone.phoneCode}}  {{data.phone.phoneNumber}}</li>
+                  <li><strong>Email:</strong> {{data.email}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+          <!-- address info -->
+          <p-divider align="center">
+            <p-badge [style]="{'background-color': '#4CAF50'}" styleClass="p-mr-2" icon="fas fa-car"
+                     value="Address Information" size="large">
+            </p-badge>
+          </p-divider>
+
+          <ng-container *ngFor="let address of data.addresses; let i = index">
+
+            <p-divider *ngIf="i !== 0" type="dashed" align="center">
+              <div class="p-d-inline-flex p-ai-center">
+                <i class="pi pi-home p-mr-2"></i>
+                <b>Address {{i + 1}}</b>
+              </div>
+            </p-divider>
+
+            <div class="cart_offers_include">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <ul class="cart_info_list2 ul_li_block clearfix">
+
+                    <li><strong>Street:</strong> {{address.street}}</li>
+                    <li><strong>City:</strong> {{address.city}}</li>
+                    <li><strong>Country</strong> {{data.addresses[0].country}}</li>
+                  </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <ul class="cart_info_list2 ul_li_block clearfix">
+                    <li><strong>House number:</strong> {{address.houseNumber}}</li>
+                    <li><strong>Zip Code:</strong> {{address.zipCode}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <hr>
+
+          <div class="cart_bottom_content mt__30 clearfix">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="abtn_wrap clearfix">
+                  <a [routerLink]="['/home']" class="text_btn text-uppercase"><span>Go back</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section *ngIf="companyData" class="container mt-3 cart_section sec_ptb_100 clearfix">
+  <div class="container">
+    <div class="row justify-content-lg-between justify-content-md-center justify-content-sm-center">
+
+
+      <div class="col-lg-4 col-md-9 col-sm-10 col-xs-12">
+        <br>
+        <div class="feature_vehicle_item mt-0 ml-0">
+          <h3 class="item_title mb-0">
+            <a>
+              {{companyData.owner | uppercase}}
+            </a>
+          </h3>
+          <div class="item_image position-relative">
+            <a class="image_wrap">
+              <img
+                src="../../../assets/img/profile.png"
+                alt="image_not_found">
+              <br>
+            </a>
+            <br>
+            <span class="item_price bg_default_blue">Signed up on {{today | date}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 col-md-9 col-sm-10 col-xs-12">
+        <div class="cart_info_content">
+
+
+          <!-- personal info -->
+          <p-divider align="center">
+            <p-badge [style]="{'background-color': '#4CAF50'}" styleClass="p-mr-2" icon="pi pi-users"
+                     value="Company Information" size="large">
+            </p-badge>
+          </p-divider>
+          <div class="cart_offers_include">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <ul class="cart_info_list2 ul_li_block clearfix">
+                  <li><strong>Business owner:</strong> {{companyData.owner | uppercase}}</li>
+                  <li><strong>National number:</strong> {{companyData.nationalNumber}}</li>
+                  <li><strong>TVA/VAT:</strong> {{companyData.tva}}</li>
+                </ul>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <ul class="cart_info_list2 ul_li_block clearfix">
+                  <li><strong>Company name:</strong> {{companyData.companyName}}</li>
+                  <li><strong>TypeOfBusiness:</strong> {{companyData.businessType}}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <br>
+
+          <!-- address info -->
+          <p-divider align="center">
+            <p-badge [style]="{'background-color': '#4CAF50'}" styleClass="p-mr-2" icon="fas fa-car"
+                     value="Address Information" size="large">
+            </p-badge>
+          </p-divider>
+
+          <ng-container *ngFor="let address of companyData.addresses; let i = index">
+
+            <p-divider *ngIf="i !== 0" type="dashed" align="center">
+              <div class="p-d-inline-flex p-ai-center">
+                <i class="pi pi-home p-mr-2"></i>
+                <b>Address {{i + 1}}</b>
+              </div>
+            </p-divider>
+
+            <div class="cart_offers_include">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <ul class="cart_info_list2 ul_li_block clearfix">
+
+                    <li><strong>Street:</strong> {{address.street}}</li>
+                    <li><strong>City:</strong> {{address.city}}</li>
+                    <li><strong>Country:</strong> {{address.country}}</li>
+                  </ul>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <ul class="cart_info_list2 ul_li_block clearfix">
+                    <li><strong>House number:</strong> {{address.houseNumber}}</li>
+                    <li><strong>Zip Code:</strong> {{address.zipCode}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <hr>
+
+          <div class="cart_bottom_content mt__30 clearfix">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="abtn_wrap clearfix">
+                  <a [routerLink]="['/home']" class="text_btn text-uppercase"><span>Go back</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<ng-template [ngIf]="!data && !companyData" class="container mt-5 justify-content-center">
+  <h2 class="text-danger"> NO RECAP TO SHOW !!! </h2>
+</ng-template>

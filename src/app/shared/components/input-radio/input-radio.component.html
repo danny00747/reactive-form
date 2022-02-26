@@ -1,0 +1,18 @@
+<label class="margin-bottom ">{{placeholder}} </label>
+
+<br>
+<span *ngFor="let enumItem of enum | keyvalue"
+      class="form-check mb-3   mr-5" style="display: inline-block">
+    {{enumItem.value}}
+  <input class="form-check-input ml-1" type="radio" name="phone" (click)="onChange($event)" [value]="enumItem.value">
+</span>
+
+
+
+
+
+
+
+
+
+

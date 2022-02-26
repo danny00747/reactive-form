@@ -1,0 +1,88 @@
+<!--address -->
+
+<p>
+  <button *ngIf="!isCollapsed" type="button" class="btn btn-outline-secondary"
+          (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample">
+    {{addressArray.length === 1 ? 'Address' : 'Addresses'}} <i class="fa fa-angle-down" aria-hidden="true"></i>
+  </button>
+  <button *ngIf="isCollapsed" type="button" class="btn btn-outline-secondary" (click)="collapse.toggle()"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+    {{addressArray.length === 1 ? 'Address' : 'Addresses'}} <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </button>
+  <a style="float: right" class="mr-3">
+
+    <!-- add address icon -->
+
+    <button (click)="addAddress()"
+      class="btn btn-secondary btn-sm rounded"
+      type="button" data-placement="top" title="Add an address">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </a>
+</p>
+
+<div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+
+  <ng-container>
+    <div class="address-list-item"
+         *ngFor="let address of addressArray.controls; let i = index">
+
+      <form autocomplete="off" [formGroup]="address">
+
+  <span class="font-weight-bold text-center text-monospace">Address {{i + 1}}
+
+    <!-- delete address icon -->
+    <a class="mr-3">
+    <button (click)="confirmDelete($event.target, i)"
+            class="btn btn-danger btn-sm rounded" type="button" title="delete this address">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </button>
+  </a>
+<p-confirmPopup></p-confirmPopup>
+
+  </span>
+
+        <div class="w-auto mb-2 mt-2 input-group">
+          <app-input class="mr-3 w-50"
+                     [parentForm]="address" [isDisabled]="false"
+                     [fieldName]="'street'" placeholder="Street" [inputType]="'text'"
+                     formControlName="street" [fontAwesomeClass]="'fa fa-road'">
+          </app-input>
+
+          <app-input class="ml-3 w-auto"
+                     [parentForm]="address" [isDisabled]="false"
+                     [fieldName]="'houseNumber'" placeholder="Number" [inputType]="'number'"
+                     formControlName="houseNumber" [fontAwesomeClass]="'fa fa-home'">
+          </app-input>
+        </div>
+
+        <div class=" w-100  input-group">
+          <app-input class="mr-3  w-50"
+                     [parentForm]="address" [isDisabled]="false"
+                     [fieldName]="'city'" placeholder="City" [inputType]="'text'"
+                     formControlName="city" [fontAwesomeClass]="'fa fa-map-marker'">
+          </app-input>
+
+          <app-input class="ml-3 mb-1 w-auto"
+                     [parentForm]="address" [isDisabled]="false"
+                     [fieldName]="'zipCode'" placeholder="Zip Code" [inputType]="'number'"
+                     formControlName="zipCode" [fontAwesomeClass]="'fa fa-map-marker'">
+          </app-input>
+
+          <app-input [parentForm]="address" [isDisabled]="false" class="w-100"
+                     [fieldName]="'country'" placeholder="Country" [inputType]="'text'"
+                     formControlName="country" [fontAwesomeClass]="'fa  fa-globe'">
+          </app-input>
+        </div>
+
+
+      </form>
+    </div>
+  </ng-container>
+</div>
+
+
+
+
+

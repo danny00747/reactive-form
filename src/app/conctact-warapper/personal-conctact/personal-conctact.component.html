@@ -1,0 +1,144 @@
+<p-toast></p-toast>
+
+
+<ng-container *ngFor="let contact of contactArrayField.controls; let i = index">
+
+
+  <div class="mt-3 ml-3 mb-2">
+    <span class="font-weight-bold text-center text-monospace">Contact {{i + 1}}</span>
+    <a style="float: right" class="mr-3">
+
+      <!-- delete contact icon -->
+      <button (click)="confirmDelete($event.target,i)"
+              class="btn btn-danger btn-sm rounded" type="button" data-placement="top" title="delete this contact">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+    </a>
+    <p-confirmPopup></p-confirmPopup>
+  </div>
+
+
+  <form autocomplete="off"
+        [formGroup]="contact"
+        (ngSubmit)="submitPersonalFrom(contact)">
+
+
+    <div class="p-3 mb-2">
+
+      <app-input
+        [parentForm]="contact" [isDisabled]="false"
+        [fieldName]="'firstName'" placeholder="First Name" [inputType]="'text'"
+        formControlName="firstName" [fontAwesomeClass]="'fa fa-user'">
+      </app-input>
+
+      <app-input
+        [parentForm]="contact" [isDisabled]="false"
+        [fieldName]="'lastName'" placeholder="Last Name" [inputType]="'text'"
+        formControlName="lastName" [fontAwesomeClass]="'fa fa-user'">
+      </app-input>
+
+      <app-input
+        [parentForm]="contact" [isDisabled]="false"
+        [fieldName]="'email'" placeholder="Email address" [inputType]="'text'"
+        formControlName="email" [fontAwesomeClass]="'fa fa-envelope'">
+      </app-input>
+
+      <app-input-radio
+        id="interfaceStyle" [placeholder]="'Choose your counrty dialling code :'"
+        [enum]="PhoneEnum" formGroupName="phone" [parentForm]="phoneGroup"
+        [formControl]="phoneCodeField">
+      </app-input-radio>
+
+      <app-input
+        [parentForm]="phoneGroup" [isDisabled]="!phoneCodeField.value" formGroupName="phone"
+        [fieldName]="'phoneNumber'" placeholder="Phone Number"
+        placement="top" ngbTooltip="{{phoneCodeField.value ? 'Eg: 485170652': 'Must choose a dialling code'}}"
+        [inputType]="'number'" [formControl]="phoneNumberField" [fontAwesomeClass]="'fa fa-phone'">
+      </app-input>
+
+      <app-input
+        [parentForm]="contact" [isDisabled]="false"
+        [fieldName]="'password'" placeholder="Create password" [inputType]="'password'"
+        formControlName="password" [fontAwesomeClass]="'fa fa-lock'">
+      </app-input>
+
+      <app-input
+        [parentForm]="contact" [isDisabled]="passwordField.invalid"
+        [fieldName]="'confirmPassword'" placeholder="Repeat password" [inputType]="'password'"
+        formControlName="confirmPassword" [fontAwesomeClass]="'fa fa-lock'">
+      </app-input>
+
+      <!--address -->
+
+      <app-address [parentForm]="addressArray" [addressArray]="addressArray" (onAddAddress)="addAddress()"></app-address>
+
+    </div>
+
+
+    <app-form-buttons
+      [parent]="contact"
+      (onDirty)="makeDirty(contact)"
+      (OnReset)="onCancel(contact)"
+      (onSave)="submitPersonalFrom(contact)" [isDisabled]="contact.invalid">
+    </app-form-buttons>
+
+    <hr>
+
+  </form>
+
+</ng-container>
+
+
+<!--
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
+      </div>
+      <input name="" class="form-control" placeholder="City" type="text">
+
+
+
+      <div class="form-group input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">
+      <i class="{{fontAwesomeClass}}"></i> </span>
+  </div>
+
+      <div class="ml-3 input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-home"></i> </span>
+      </div>
+      <input style="max-width: 110px;" class="form-control" placeholder="Zip Code" type="number">
+    </div>
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-globe"></i> </span>
+      </div>
+      <input name="" class="form-control" placeholder="Country" type="email">
+    </div>
+
+
+
+
+
+    <app-select
+  [formControl]="phoneCodeField" [options]="PhoneCodOptionData"
+  [fieldName]="'phoneCode'" placeholder="Email address" [parentForm]="personalFrom"
+  formControlName="phoneCode">
+  <app-input-phone></app-input-phone>
+</app-select>
+
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+      </div>
+      <select class="custom-select" style="max-width: 120px;">
+        <option selected="">+32</option>
+        <option value="1">+33</option>
+        <option value="2">+31</option>
+        <option value="3">+49</option>
+      </select>
+      <input name="" class="form-control" placeholder="Phone number" type="text">
+    </div>  form-group// -->

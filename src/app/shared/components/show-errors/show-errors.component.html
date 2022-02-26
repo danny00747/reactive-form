@@ -1,0 +1,6 @@
+<div *ngIf="ctrl.touched && ctrl.errors | detectErrors">
+  <p class="field-error text-danger"
+     *ngFor="let error of ctrl.errors | displayErrors:ctrl">
+    {{error}}
+  </p>
+</div>

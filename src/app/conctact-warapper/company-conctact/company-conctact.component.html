@@ -1,0 +1,74 @@
+<p-toast></p-toast>
+
+<ng-container *ngFor="let company of companyArrayField.controls; let i = index">
+
+
+  <div class="mt-3 ml-3 mb-2">
+    <span class="font-weight-bold text-center text-monospace">Company {{i + 1}}</span>
+    <a style="float: right" class="mr-3  ">
+
+      <!-- delete company icon -->
+      <button (click)="confirmDelete($event.target, i)"
+        class="btn btn-danger btn-sm rounded"
+        name="deleteGroupBtn"
+        type="button" data-placement="top" title="Delete">
+        <i class="fa fa-trash" aria-hidden="true"></i></button>
+    </a>
+  </div>
+
+
+  <form class="registration-form" autocomplete="off"
+        [formGroup]="company"
+        (ngSubmit)="submitCompanyForm(company)">
+
+
+    <div class="p-3 mb-2">
+
+      <app-input
+        [parentForm]="company" [isDisabled]="false"
+        [fieldName]="'owner'" placeholder="Bussiness Owner" [inputType]="'text'"
+        formControlName="owner" [fontAwesomeClass]="'fa fa-id-badge'">
+      </app-input>
+
+      <app-input
+        [parentForm]="company" [isDisabled]="false"
+        [fieldName]="'nationalNumber'" placeholder="National Number" [inputType]="'text'"
+        placement="top" ngbTooltip="23.05.10-687.93"
+        formControlName="nationalNumber" [fontAwesomeClass]="'fa fa-id-card'">
+      </app-input>
+
+      <app-input
+        [parentForm]="company" [isDisabled]="false"
+        [fieldName]="'tva'" placeholder="TVA" [inputType]="'text'"
+        placement="top" ngbTooltip="BE0614529819"
+        formControlName="tva" [fontAwesomeClass]="'fa fa-id-card'">
+      </app-input>
+
+      <app-input
+        [parentForm]="company" [isDisabled]="tvaField.invalid"
+        [fieldName]="'companyName'" placeholder="Company Name" [inputType]="'text'"
+        formControlName="companyName" [fontAwesomeClass]="'fa fa-building'">
+      </app-input>
+
+      <app-select style="max-width: 120px;" [fontAwesomeClass]="'fa fa-briefcase'"
+                  [formControl]="businessTypeField" [options]="BusinessTypOptionData" [label]="'Type of Business'"
+                  [fieldName]="'businessType'" placeholder="Email addressss" [parentForm]="company"
+                  formControlName="businessType">
+      </app-select>
+
+      <!--address -->
+      <app-address [parentForm]="addressArray" [addressArray]="addressArray" (onAddAddress)="addAddress()"></app-address>
+
+    </div>
+
+    <app-form-buttons
+      [parent]="company"
+      (onDirty)="makeDirty(company)"
+      (OnReset)="onCancel(company)"
+      (onSave)="submitCompanyForm(company)"  [isDisabled]="company.invalid">
+    </app-form-buttons>
+
+    <hr>
+
+  </form>
+</ng-container>
